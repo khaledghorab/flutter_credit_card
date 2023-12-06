@@ -27,6 +27,10 @@ class CreditCardForm extends StatefulWidget {
     this.isHolderNameVisible = true,
     this.isCardNumberVisible = true,
     this.isExpiryDateVisible = true,
+    this.cardNumberEnabled = true,
+    this.expiryDateEnabled = true,
+    this.cvvNumberEnabled = true,
+    this.cardHolderNameEnabled = true,
     this.enableCvv = true,
     this.autovalidateMode,
     this.cardNumberValidator,
@@ -123,6 +127,11 @@ class CreditCardForm extends StatefulWidget {
   /// A validator for card holder text field.
   final ValidationCallback? cardHolderValidator;
 
+  final bool cardNumberEnabled;
+  final bool expiryDateEnabled;
+  final bool cvvNumberEnabled;
+  final bool cardHolderNameEnabled;
+
   /// Setting this flag to true will disable autofill hints for Credit card
   /// number text field. Flutter has a bug when auto fill hints are enabled for
   /// credit card numbers it shows keyboard with characters. But, disabling
@@ -193,6 +202,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
               margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: TextFormField(
                 key: widget.cardNumberKey,
+                enabled: widget.cardNumberEnabled,
                 obscureText: widget.obscureNumber,
                 controller: _cardNumberController,
                 onChanged: _onCardNumberChange,
@@ -224,6 +234,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
                     child: TextFormField(
                       key: widget.expiryDateKey,
+                      enabled: widget. expiryDateEnabled,
                       controller: _expiryDateController,
                       onChanged: _onExpiryDateChange,
                       focusNode: expiryDateNode,
@@ -255,6 +266,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
                     child: TextFormField(
                       key: widget.cvvCodeKey,
+                      enabled:  widget.cvvNumberEnabled,
                       obscureText: widget.obscureCvv,
                       focusNode: cvvFocusNode,
                       controller: _cvvCodeController,
@@ -288,6 +300,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
               margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
               child: TextFormField(
                 key: widget.cardHolderKey,
+                enabled: widget.cardHolderNameEnabled,
                 controller: _cardHolderNameController,
                 onChanged: _onCardHolderNameChange,
                 focusNode: cardHolderNode,
